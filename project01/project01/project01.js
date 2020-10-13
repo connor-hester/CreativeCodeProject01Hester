@@ -1,76 +1,88 @@
-let option;
-let x;
-let y;
-let xSpeed;
-let ySpeed;
+
 function setup(){
-	createCanvas(600,600);
+	createCanvas(500,500);
 	ellipseMode(CENTER);
-	xSpeed=2;
-	ySpeed=2.2;
-	x=random(width);
-	y=random(height);
+
+	e1=new Eye();
+	e2=new Eye();
+	e3=new Eye();
+	e4=new Eye();
+	e5=new Eye();
 }
 
 function draw(){
 	background(0);
-	eye();
-	eye();
-	moveEye();
-	checkEdge();
-
+	e1.initialize();
+	e2.initialize();
+	e3.initialize();
+	e4.initialize();
+	e5.initialize();
+	// if(e2.x-e1.x<2 && e2.y-e1.y<2){
+	// 	e2.deflect();
+	// 	e1.deflect();
+	// }
 }
 
-function eye(){
-	fill(0,0,180);
+class Eye{
+ constructor(){
+	 this.xSpeed=random(1,3);
+	 this.ySpeed=random(1,3);
+	 this.x=random(1,width);
+	 this.y=random(1,height);
+	 this.r=0;
+	 this.b=100;
+	 this.rad=random(15,30);
+ }
+ display(){
+	fill(this.r,0,this.b);
 	noStroke();
-	ellipse(x, y, 20, 20);
+	ellipse(this.x, this.y, this.rad, this.rad);
 	stroke(255);
-	ellipse(x,y,12,8);
+	ellipse(this.x,this.y,12,8);
 	fill(255);
-	ellipse(x,y, 4, 8);
+	ellipse(this.x,this.y, 4, 8);
+ }
+ move(){
+	this.x=this.x+this.xSpeed;
+	this.y=this.y+this.ySpeed;
 }
-
-function moveEye(){
-	x=x+xSpeed;
-	y=y+ySpeed;
-}
-
-function checkEdge(){
-	if(x>width||x<0){
-		xSpeed*=-1;
+ checkEdge(){
+	if(this.x>width||this.x<0){
+		this.xSpeed*=-1.02;
+		this.r+=10;
+		this.b-=10;
+		if(this.r>240){
+			this.rad++;
+		}
+		
 	}
-	if(y>height||y<0){
-		ySpeed*=-1;
+	if(this.y>height||this.y<0){
+		this.ySpeed*=-1.02;
+		this.r+=10;
+		this.b-=10;
+		if(this.r>240){
+			this.rad++;
+		}
 	}
 }
-// Class Eye{
-// 	let x, y, xSpeed, ySpeed;
-//  Eye(){
-// 	 xSpeed=2;
-// 	 ySpeed=2.2;
-// 	 x=random(width);
-// 	 y=random(height);
-//  }
-//  void display(){
-// 	fill(0,0,180);
-// 	noStroke();
-// 	ellipse(x, y, 20, 20);
-// 	stroke(255);
-// 	ellipse(x,y,12,8);
-// 	fill(255);
-// 	ellipse(x,y, 4, 8);
-//  }
-// void moveEye(){
-// 	x=x+xSpeed;
-// 	y=y+ySpeed;
-// }
-// void checkEdge(){
-// 	if(x>width||x<0){
-// 		xSpeed*=-1;
-// 	}
-// 	if(y>height||y<0){
-// 		ySpeed*=-1;
-// 	}
-// }
-// }
+initialize(){
+	this.display();
+	this.move();
+	this.checkEdge();
+	this.explode();
+}
+deflect(){
+	this.xSpeed*=-1;
+	this.ySpeed*=-1;
+}
+explode(){
+	if(this.rad>50){
+		this.xSpeed=0;
+		this.ySpeed=0;
+		this.x=width/2+5*this.rad;
+		this.y=height/2+5*this.rad;
+		this.b=10;
+		this.r=10;
+	}
+}
+}
