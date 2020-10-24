@@ -4,7 +4,7 @@ class Eye{
        this.position= new createVector(random(1,width),random(1,height));
         this.r=0;
         this.g=150;
-        this.rad=random(15,30);
+        this.rad=random(30,45);
         this.shortestD=null;
     }
    
@@ -126,10 +126,10 @@ class Eye{
    }
    
    panic(){ //when the radius gets too big the ball moves to the middle of the screen and shakes violently 
-       if(this.rad>50){
+       if(this.rad>65){
            timeStart=millis();
-           this.position.x=random(50,width-50);
-           this.position.y=random(50,height-50);
+           this.position.x=width/2;
+           this.position.y=height/2;
            this.position.x+=random(-5,5);
            this.position.y+=random(-5,5);
        }
