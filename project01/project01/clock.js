@@ -1,7 +1,10 @@
 class Clock{
     constructor(){
+      this.interval=2000;
+      this.timeStamp=millis();
+      this.opacity=0;
     }
-    display(){
+    display(){ //creates and shows a generic clock in the center of the drawing 
         fill(255);
         stroke(0);
         strokeWeight(1);
@@ -21,8 +24,10 @@ class Clock{
         line(width/2-84,height/2-45, width/2-75, height/2-40);//10  
         line(width/2-45,height/2-84, width/2-40, height/2-75);//11
         line(width/2, height/2-95, width/2, height/2-85);//12
+        fill(230,0,0,this.opacity);
+        ellipse(width/2,height/2,200,200);
     }
-    time(){
+    time(){ //based on the second() function, the hour hand of the clock moves around the circle
         if(second()==0 || second()==12 || second()==24 || second()==36 || second()==48 ||second()==60){
             line(width/2,height/2, width/2+38, height/2-70);//1:00
           }
@@ -59,6 +64,15 @@ class Clock{
           else if(second()==11 || second()==23 || second()==35 || second()==47 || second()==59){
             line(width/2,height/2,width/2,height/2-80);//12:00
           }
+    }
+    opacityFill(){
+      if(millis()-this.timeStamp>this.interval){
+        this.opacity+=2;
+        this.interval+=2000;
+      }
+      if(this.opacity>80){
+        this.opacity=80;
+      }
     }
   
 }

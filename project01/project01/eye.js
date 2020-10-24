@@ -14,7 +14,7 @@ class Eye{
        ellipse(this.position.x, this.position.y, this.rad, this.rad);
        stroke(255);
        ellipse(this.position.x,this.position.y,12,8);
-       fill(255);
+       fill(0);
        ellipse(this.position.x,this.position.y, 4, 8);
     }
    
@@ -44,9 +44,16 @@ class Eye{
        }
    }
    
+   exPt(){ //exclamation point shape
+    fill(200,0,0);
+    ellipse(this.position.x,this.position.y-15,5,5);
+    triangle(this.position.x,this.position.y-20,this.position.x-2,this.position.y-32,this.position.x+2,this.position.y-32);
+}
+
    deflect(){ //makes the Eyes bounce off each other in the opposite directions
        this.velocity.x*=-1;
        this.velocity.y*=-1;
+        this.exPt();
    }
    
    direction(){ //indicates which direction the emote(s) should face
@@ -118,19 +125,18 @@ class Eye{
    }
    }
    
-   panic(){
+   panic(){ //when the radius gets too big the ball moves to the middle of the screen and shakes violently 
        if(this.rad>50){
            timeStart=millis();
-           this.position.x=width/2;
-           this.position.y=width/2;
+           this.position.x=random(50,width-50);
+           this.position.y=random(50,height-50);
            this.position.x+=random(-5,5);
            this.position.y+=random(-5,5);
        }
    }
-   explode(){ //stops the objects motion... idk what I want this to do yet
-       this.rad
-       this.g=50;
-       this.r=50;
+   explode(other){ //stops the objects motion... idk what I want this to do yet
+       this.rad=0;
+        other.display(this);
            }
        
    }

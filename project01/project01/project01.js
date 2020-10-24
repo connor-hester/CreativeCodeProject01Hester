@@ -16,14 +16,15 @@ let d4;
 function setup(){ //initialize and create objects
 	createCanvas(600,600);
 	ellipseMode(CENTER);
+	angleMode(DEGREES);
 	totalTime=3000;
 	e1=new Eye();
 	e2=new Eye();
 	e3=new Eye();
 	c1= new Clock();
-	ex1= new Exclamation();
-	ex2= new Exclamation();
-	ex3= new Exclamation();
+	ex1= new Explosion();
+	// ex2= new Exclamation();
+	// ex3= new Exclamation();
 }
 
 function draw(){ //main 
@@ -35,15 +36,16 @@ function draw(){ //main
 	rect(50,height-50,width-100,50);
 	c1.display();
 	c1.time();
+	c1.opacityFill();
 	initialize(e1);
 	initialize(e2);
 	initialize(e3);
 	e1.overlap(e2);
 	e2.overlap(e3);
 	e3.overlap(e1);
-	ex1.group(e1);
-	ex2.group(e2);
-	ex3.group(e3);
+	// ex1.display(e1);
+	// ex2.display(e2);
+	// ex3.display(e3);
 }
 
 function initialize(eye){ //groups all of the basic methods of Eye into one function
@@ -52,8 +54,8 @@ eye.move();
 eye.checkEdge();
 eye.emote();
 eye.panic();
-if(timePassed>totalTime){
-	eye.explode();
-}
+//if(timeStart>totalTime){
+//	eye.explode(ex1);
+//}
 }
 
