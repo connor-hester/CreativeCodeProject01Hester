@@ -11,7 +11,6 @@ function setup(){ //initialize and create objects
 	e2=new Eye();
 	e3=new Eye();
 	c1= new Clock();
-	ex1= new Explosion();
 	radius=5;
 }
 
