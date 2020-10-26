@@ -3,15 +3,21 @@ let xDir;
 let yDir;
 let flip;
 let radius;
+let timer;
+//let stars = [];
 
 function setup(){ //initialize and create objects
 	createCanvas(600,600);
 	ellipseMode(CENTER);
-	e1=new Eye();
-	e2=new Eye();
-	e3=new Eye();
+	e1=new Eye(380,190);
+	e2=new Eye(160,520);
+	e3=new Eye(540,200);
 	c1= new Clock();
 	radius=5;
+	timer=4;
+	// for(let i=0; i<100;i++){
+	// 	stars.push(new Star());
+	// }
 }
 
 function draw(){ //main 
@@ -38,8 +44,9 @@ function draw(){ //main
 	rect(width-200,150,50,50);
 	rect(width-200,height-200,50,50);
 	rect(150,height-200,50,50);
-	stroke(255);
-	line(50,0,100,50); //adds 3D effect
+	stroke(100);
+	strokeWeight(1);
+	line(50,0,100,50); //adds 3D effect with lines
 	line(50,50,100,100);
 	line(0,50,50,100);
 	line(0,height-50,50,height-100);
@@ -83,29 +90,77 @@ function draw(){ //main
 		ellipse(width/4, 3*height/4,radius,radius);
 		radius+=1;
 		}
-	if(radius>4*width/5){ //once screen is black, draws skull
-		fill(255);
-		noStroke();
-	  fill(255);
-	  ellipse(width/2, height/2, 150, 100);
-	  rect(width/2-50, height/2, 100, 80);
-	  fill(0);
-	  ellipse(width/2-40, height/2-15, 20, 30);
-	  ellipse(width/2+40, height/2-15, 20, 30);
-	  ellipse(width/2-7, height/2+20, 6, 18);
-	  ellipse(width/2+7, height/2+20, 6, 18);
-	  rect(width/2-45, height/2+55, 5, 20);
-	  rect(width/2-20,height/2+55,5,20);
-	  rect(width/2, height/2+55, 5, 20);
-	  rect(width/2+20, height/2+55, 5, 20);
-	  rect(width/2+40, height/2+55, 5, 20);
+	if(radius>4*width/5){ //once screen is black, draws eye
+		if(frameCount%60==0 && timer>0){
+			timer--;
+		}
+		if(timer==4 || timer==3){
+		stroke(0);
+  		fill(255);
+  		ellipse(width/2,height/2,90,45);
+  		fill(0,0,200);
+  		ellipse(width/2,height/2,30,45);
+  		fill(0);
+  		ellipse(width/2,height/2,15,30);
+  		stroke(255);
+  		arc(width/2,height/2-5,90,35,PI,0,CHORD);
+  		noFill();
+  		arc(width/2,height/2+20,80,15,0,PI);
+		arc(width/2,height/2+28,73,15,0,PI);
+		}
+		if(timer==2 || timer==1){
+		stroke(0);
+  		fill(255);
+  		ellipse(width/2,height/2,90,45);
+  		fill(0,0,200);
+  		ellipse(width/2,height/2,30,45);
+  		fill(0);
+  		ellipse(width/2,height/2,15,30);
+  		stroke(255);
+  		arc(width/2,height/2+5,93,57,PI,0,CHORD);
+  		noFill();
+  		arc(width/2,height/2+20,80,15,0,PI);
+		arc(width/2,height/2+28,73,15,0,PI);
+		}
+		if(timer==0){
+		stroke(255);
+		fill(0);
+		ellipse(width/2,height/2-1,90,45);
+		noFill();
+		strokeWeight(3);
+        arc(width/2,height/2, 90, 45, 0, PI); 
+        line(width/2-35,height/2+15,width/2-40,height/2+20); 
+        line(width/2-17, height/2+20, width/2-22,height/2+28);
+        line(width/2,height/2+25, width/2, height/2+30);
+        line(width/2+17, height/2+20, width/2+22, height/2+28);
+        line(width/2+35,height/2+15, width/2+40, height/2+20);
+		}
+		// if (timer==0){
+		// 	timer=0;
+		// for(let i=0; i<100;i++){
+		// 	stars[i].display();
+		// }
+		// stroke(255);
+		// fill(0);
+		// ellipse(width/2,height/2-1,90,45);
+		// noFill();
+		// strokeWeight(3);
+        // arc(width/2,height/2, 90, 45, 0, PI); 
+        // line(width/2-35,height/2+15,width/2-40,height/2+20); 
+        // line(width/2-17, height/2+20, width/2-22,height/2+28);
+        // line(width/2,height/2+25, width/2, height/2+30);
+        // line(width/2+17, height/2+20, width/2+22, height/2+28);
+		// line(width/2+35,height/2+15, width/2+40, height/2+20);
+		// }
 	}
+	
 	
 }
 function initialize(eye){ //groups all of the basic methods of Eye into one function
 eye.display();
 eye.move();
 eye.checkEdge();
+//eye.checkCenter();
 eye.emote();
 }
 

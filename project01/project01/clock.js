@@ -72,8 +72,8 @@ class Clock{
         this.opacity+=2;
         this.interval+=2000;
       }
-      if(this.opacity>80){//stops getting redder at 80% opacity
-        this.opacity=80;
+      if(this.opacity>90){//stops getting redder at 80% opacity
+        this.opacity=90;
       }
     }
   

@@ -1,7 +1,7 @@
 class Eye{
-    constructor(){ //initializes with the speed of the object, its starting position and its starting size. They always start green but the rest is random.  
+    constructor(x,y){ //initializes with the speed of the object, its starting position and its starting size. They always start green but the rest is random.  
        this.velocity= new createVector(1.2, 1.2); 
-       this.position= new createVector(random(1,width),random(1,height));
+       this.position= new createVector(x,y);
         this.r=0;
         this.g=200; //all objects start green
         this.b=0;
@@ -64,6 +64,15 @@ class Eye{
            this.phaseChange();
        }
    }
+   
+//    checkCenter(){
+//        if((this.position.x==200 && this.position.y>=200 && this.position.y<=400)||(this.position.x==400 && this.position.y>=200 && this.position.y<=400)){
+//            this.velocity.x*=-1;
+//        }
+//        if((this.position.y==200 && this.position.x>=200 && this.position.x<=400)||(this.position.y==400 && this.position.x>=200 && this.position.x<=400)){
+//            this.velocity.y*=-1;
+//        }
+//    }
 
    phaseChange(){ //based on the phase the eye is in, the color, velocity, and radius change accordingly
        this.checkPhase();
@@ -100,6 +109,7 @@ class Eye{
    
    exPt(){ //creates the shape of 3 exclamation points
     fill(200,0,0);
+    noStroke();
     ellipse(this.position.x,this.position.y-25,5,5);
     triangle(this.position.x,this.position.y-30,this.position.x-2,this.position.y-42,this.position.x+2,this.position.y-42);
     ellipse(this.position.x-20,this.position.y-25,5,5);
